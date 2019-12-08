@@ -57,6 +57,7 @@ public class Ajout_reunion_section extends AppCompatActivity  implements TimePic
                     Log.d(TAG, "onClick: " + participant.getText().toString());
                     Log.d(TAG, "onClick: " + salle.getText().toString());
                     service.ajoutReunion(nom_reunion.getText().toString(),date.getText().toString(),heure.getText().toString(),participant.getText().toString(),salle.getText().toString());
+
                     finish();
                 }
             }

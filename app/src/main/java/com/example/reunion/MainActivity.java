@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,9 +35,47 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ApiService service;
     private ImageButton ajouter;
     private MyAdapter myAdapter;
-    private List<String> names = new ArrayList<>();
+    private static final String TAG = "MainActivity";
 
+    @Override
+    protected void onStart() {
+        adapter.notifyDataSetChanged();
+        super.onStart();
+    }
 
+    @Override
+    protected void onResume() {
+        adapter.notifyDataSetChanged();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        adapter.notifyDataSetChanged();
+        super.onPause();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        service = DI.getService();
+        recyclerView = (RecyclerView) findViewById(R.id.recycleViewId);
+        ajouter = (ImageButton) findViewById(R.id.ajout);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        listItems = service.getReunion();
+        adapter = new MyAdapter(this, listItems);
+        myAdapter =new MyAdapter(this, listItems);
+        recyclerView.setAdapter(adapter);
+        ajouter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Ajout_reunion_section.class);
+                startActivity(intent);
+            }
+        });
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
@@ -45,34 +84,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         searchView.setOnQueryTextListener(this);
         return true;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        List<String> names = new ArrayList<>();
-        service = DI.getService();
-        recyclerView = (RecyclerView) findViewById(R.id.recycleViewId);
-        ajouter = (ImageButton) findViewById(R.id.ajout);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        listItems = service.getReunion();
-        adapter = new MyAdapter(this, listItems);
-        recyclerView.setAdapter(adapter);
-
-        ajouter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Ajout_reunion_section.class);
-                startActivity(intent);
-
-            }
-        });
-
-
-
-    }
-
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
@@ -80,18 +91,22 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String s) {
-        names.add("Rouge");
-        names.add("vert");
-        names.add("bleu");
         String userInput = s.toLowerCase();
-        List<String> newList =new ArrayList<>();
-        for (String name: names)
+        List<listItem> newList =new ArrayList<>();
+        for (listItem name: listItems)
         {
-            if (listItems.contains(userInput)){
+            Log.d(TAG, "onQueryTextChange: name "+ listItems);
+            if (name.getSalle().toString().toLowerCase().contains(userInput) || name.getDate().toString().toLowerCase().contains(userInput)){
                 newList.add(name);
+                Log.d(TAG, "onQueryTextChange: match ");
             }
         }
+        Log.d(TAG, "onQueryTextChange: names  " + listItems);
+        Log.d(TAG, "onQueryTextChange: userInput  " + userInput);
+        Log.d(TAG, "onQueryTextChange: newList "+ newList);
         myAdapter.updateListe(newList);
+        adapter.notifyDataSetChanged();
+
         return true;
     }
 }

@@ -24,10 +24,10 @@ import Services.ApiService;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private Context context;
     private listItem reunion;
-    private final List<listItem> listItemes;
+    private static List<listItem> listItemes;
+    private List<listItem> listItemesFull;
     private static final String TAG = "MyAdapter";
     private ApiService exe;
-    private List<String> names;
 
 
     @NonNull
@@ -38,13 +38,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
-    public MyAdapter (Context context , List listItemes ){
+    public MyAdapter (Context context , List<listItem> listItemes ){
         this.context=context;
         this.listItemes=listItemes;
+        Log.d(TAG, "updateListe: CONSTRUC " + listItemes);
+        listItemesFull= new ArrayList<>(listItemes);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull MyAdapter.ViewHolder viewHolder, final int position) {
         exe= DI.getService();
         final listItem item= listItemes.get(position);
         viewHolder.name.setText(item.getNom_reunion());
@@ -52,7 +54,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.heure.setText(item.getHeure());
         viewHolder.participant.setText(item.getParticipant());
         viewHolder.salle.setText(item.getSalle());
-
         Log.d(TAG, "onBindViewHolder: item " + item);
         viewHolder.poubelle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,17 +62,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Log.d(TAG, "onClick: item supprimé " + item);
                 exe.supprimeReunion(item);
                 Log.d(TAG, "onClick: Liste apres suppression "+ listItemes);
+                notifyItemRemoved(position);
             }
         });
     }
+     public void updateListe(List<listItem> newList) {
+         listItemes = new ArrayList<>();
+         Log.d(TAG, "updateListe: newlist" + newList);
+         Log.d(TAG, "updateListe: before " + listItemes);
+        listItemes.addAll(newList);
+         Log.d(TAG, "updateListe: after " + listItemes);
+         notifyDataSetChanged();
 
+    }
     @Override
     public int getItemCount() {
+        Log.d(TAG, "updateListe: SIZE " + listItemes);
         return listItemes.size();
+
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView name;
         public TextView description;
         public TextView heure;
@@ -87,15 +98,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             participant= (TextView) itemView.findViewById(R.id.partic);
             salle= (TextView) itemView.findViewById(R.id.salle);
             poubelle= (ImageButton) itemView.findViewById(R.id.item_list_delete_button);
-
         }
     }
 
-    public void updateListe(List<String> newList) {
-        names= new ArrayList<>();
-        names.addAll(newList);
-        notifyDataSetChanged();
 
-    }
 
 }
