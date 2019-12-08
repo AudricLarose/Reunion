@@ -60,10 +60,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onClick(View view) {
                 Log.d(TAG, "onClick: liste avant suppression " + listItemes);
                 Log.d(TAG, "onClick: item supprimé " + item);
+                Log.d(TAG, "onClick: "+ position);
                 exe.supprimeReunion(item);
                 Log.d(TAG, "onClick: Liste apres suppression "+ listItemes);
-                notifyItemRemoved(position);
-            }
+                notifyDataSetChanged();            }
         });
     }
      public void updateListe(List<listItem> newList) {
@@ -77,7 +77,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
     @Override
     public int getItemCount() {
-        Log.d(TAG, "updateListe: SIZE " + listItemes);
         return listItemes.size();
 
     }
