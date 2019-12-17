@@ -24,10 +24,11 @@ import Services.ApiService;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private Context context;
     private listItem reunion;
-    private static List<listItem> listItemes;
+    private  List<listItem>   listItemes;
     private List<listItem> listItemesFull;
     private static final String TAG = "MyAdapter";
     private ApiService exe;
+    private boolean Confirmation;
 
 
     @NonNull
@@ -48,6 +49,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder viewHolder, final int position) {
         exe= DI.getService();
+        listItemes=exe.getReunion();
+        Log.d(TAG, "onBindViewHolder: liste total " + listItemes);
         final listItem item= listItemes.get(position);
         viewHolder.name.setText(item.getNom_reunion());
         viewHolder.description.setText(item.getDate());
@@ -60,17 +63,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onClick(View view) {
                 Log.d(TAG, "onClick: liste avant suppression " + listItemes);
                 Log.d(TAG, "onClick: item supprimé " + item);
-                Log.d(TAG, "onClick: "+ position);
+                Log.d(TAG, "onClick: position numero "+ position);
                 exe.supprimeReunion(item);
-                Log.d(TAG, "onClick: Liste apres suppression "+ listItemes);
-                notifyDataSetChanged();
-            }
+                    Log.d(TAG, "onClick: Liste apres suppression "+ listItemes);
+                notifyDataSetChanged();            }
         });
     }
      public void updateListe(List<listItem> newList) {
+         exe= DI.getService();
          listItemes = new ArrayList<>();
-        listItemes.addAll(newList);
+         Log.d(TAG, "updateListe: newlist" + newList);
+         exe.ajouterTout(newList);
+         Log.d(TAG, "updateListe: listitem" + listItemes);
          notifyDataSetChanged();
+
+    }
+    public void updateListe2(List<listItem> newList) {
+        exe= DI.getService();
+        listItemes = new ArrayList<>();
+        Log.d(TAG, "updateListe: newlist" + newList);
+        exe.Reset(newList);
+        Log.d(TAG, "updateListe: listitem" + listItemes);
+        notifyDataSetChanged();
 
     }
     @Override

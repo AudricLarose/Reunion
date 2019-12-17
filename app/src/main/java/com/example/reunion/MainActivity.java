@@ -1,6 +1,7 @@
 package com.example.reunion;
 
 import android.app.DatePickerDialog;
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ImageButton ajouter;
     private MyAdapter myAdapter;
     private ImageView refresh;
+    public static Boolean ConfirmationReset;
     private final List<listItem> ListReset=new ArrayList<>();
     private SwipeRefreshLayout refreshLayout;
     private static final String TAG = "MainActivity";
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_main);
         service = DI.getService();
         refreshLayout=(SwipeRefreshLayout) findViewById(R.id.Refreshing);
+
         creation=new SalleDial.changement() {
     @Override
     public void application() {
@@ -83,10 +86,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         ListReset.addAll(service.getReunion());
         myAdapter =new MyAdapter(this, listItems);
         recyclerView.setAdapter(adapter);
+        listItems= ListReset;
+        myAdapter.updateListe2(listItems);
+        creation.application();
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myAdapter.updateListe(ListReset);
+                ConfirmationReset=true;
+                Log.d(TAG, "onRefresh: liste item "+ listItems);
+                myAdapter.updateListe(listItems);
                 creation.application();
                 refresh.setVisibility(View.GONE);
             }
@@ -94,8 +102,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                myAdapter.updateListe(ListReset);
+                listItems= ListReset;
+                myAdapter.updateListe2(listItems);
                 creation.application();
+                Log.d(TAG, "onRefresh: listereset "+ ListReset);
+                Log.d(TAG, "onRefresh: liste item "+ listItems);
+                adapter.notifyDataSetChanged();
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -165,23 +177,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 return super.onOptionsItemSelected(item);
         }
     }
-
     public void openDialogSalle() {
         SalleDial salleDial=new SalleDial();
         salleDial.show(getSupportFragmentManager(),"Selectionner une Salle");
+        refresh.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
     }
-    public void openDialogDate() {
-        DateDial salleDial=new DateDial();
-        salleDial.show(getSupportFragmentManager(),"Selectionner une Date");
-
-    }
-
     @Override
     public void application() {
         adapter.notifyDataSetChanged();
     }
-
     @Override
     public void onDateSet(DatePicker datePicker,int year, int month, int day) {
         Calendar c = Calendar.getInstance();

@@ -20,4 +20,11 @@ public abstract class ListeReunion {
         return new ArrayList<>(liste_des_items);
     }
 
+    public static List<listItem> list_vide = Arrays.asList(
+    );
+
+    static List<listItem> list_vide_modifiable() {
+        return new ArrayList<>(list_vide);
+    }
+
 }

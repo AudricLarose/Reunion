@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.Switch;
 
 import java.util.ArrayList;
@@ -38,9 +39,9 @@ public class SalleDial extends AppCompatDialogFragment {
     private changement creation;
     private static final String TAG = "SalleDial";
 
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
         LayoutInflater inflater= getActivity().getLayoutInflater();
         final View view=inflater.inflate(R.layout.salle_layout,null);
@@ -103,7 +104,6 @@ public class SalleDial extends AppCompatDialogFragment {
         choix10= view.findViewById(R.id.checkBox10);
         return builder.create();
     }
-
     private void verifie(String choix) {
         List<listItem> newList = new ArrayList<>();
         for (listItem name : listItems) {
@@ -119,9 +119,7 @@ public class SalleDial extends AppCompatDialogFragment {
         Log.d(TAG, "setPositiveButton: newList " + newList);
         myAdapter.updateListe(newList);
         creation.application();
-
     }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -134,4 +132,4 @@ public class SalleDial extends AppCompatDialogFragment {
     public interface changement{
         void application();
     }
-}
+ }
