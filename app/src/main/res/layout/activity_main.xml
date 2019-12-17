@@ -6,18 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleViewId"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/Refreshing">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleViewId"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ImageButton
         android:id="@+id/ajout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="63dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -25,5 +32,15 @@
         android:background="#00FFFFFF"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
+    <ImageView
+        android:id="@+id/Refresh"
+        android:layout_width="54dp"
+        android:layout_height="37dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="#002196F3"
+        android:visibility="gone"
+        app:srcCompat="@android:drawable/ic_delete"
+        />
 
-</RelativeLayout>
+    </RelativeLayout>

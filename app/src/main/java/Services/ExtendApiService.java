@@ -2,6 +2,7 @@ package Services;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.listItem;
@@ -24,12 +25,24 @@ import static android.support.constraint.Constraints.TAG;
     }
 
 
+
     @Override
     public void supprimeReunion(listItem reunion) {
         liste_itemes.remove(reunion);
     }
 
-    @Override
+        @Override
+        public void recherche(String item) {
+            List<listItem> newList = new ArrayList<>();
+            for (listItem name : liste_itemes) {
+                Log.d(TAG, "onQueryTextChange: name " + liste_itemes);
+                if (name.getSalle().toString().toLowerCase().contains(item) || name.getDate().toString().toLowerCase().contains(item)) {
+                    newList.add(name);
+                    Log.d(TAG, "recherche: ");                }
+            }
+        }
+
+        @Override
     public void filtreReunion() {
 
     }

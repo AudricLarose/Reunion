@@ -1,9 +1,9 @@
 package com.example.reunion;
 
-import android.app.LauncherActivity;
-import android.app.TimePickerDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,14 +13,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.TimePicker;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import Adapter.MyAdapter;
@@ -28,13 +28,17 @@ import DI.DI;
 import Model.listItem;
 import Services.ApiService;
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, SalleDial.changement, DatePickerDialog.OnDateSetListener {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<listItem> listItems;
+    private SalleDial.changement creation;
     private ApiService service;
     private ImageButton ajouter;
     private MyAdapter myAdapter;
+    private ImageView refresh;
+    private final List<listItem> ListReset=new ArrayList<>();
+    private SwipeRefreshLayout refreshLayout;
     private static final String TAG = "MainActivity";
 
     @Override
@@ -55,19 +59,46 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         super.onPause();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         service = DI.getService();
+        refreshLayout=(SwipeRefreshLayout) findViewById(R.id.Refreshing);
+        creation=new SalleDial.changement() {
+    @Override
+    public void application() {
+        adapter.notifyDataSetChanged();
+    }
+};
         recyclerView = (RecyclerView) findViewById(R.id.recycleViewId);
         ajouter = (ImageButton) findViewById(R.id.ajout);
+        refresh= (ImageView) findViewById(R.id.Refresh);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         listItems = service.getReunion();
         adapter = new MyAdapter(this, listItems);
+        adapter.notifyDataSetChanged();
+        ListReset.addAll(service.getReunion());
         myAdapter =new MyAdapter(this, listItems);
         recyclerView.setAdapter(adapter);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myAdapter.updateListe(ListReset);
+                creation.application();
+                refresh.setVisibility(View.GONE);
+            }
+        });
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                myAdapter.updateListe(ListReset);
+                creation.application();
+                refreshLayout.setRefreshing(false);
+            }
+        });
         ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
@@ -92,21 +124,87 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextChange(String s) {
         String userInput = s.toLowerCase();
+        recherche (userInput);
+        return true;
+    }
+
+    public void recherche(String item) {
         List<listItem> newList =new ArrayList<>();
         for (listItem name: listItems)
         {
             Log.d(TAG, "onQueryTextChange: name "+ listItems);
-            if (name.getSalle().toString().toLowerCase().contains(userInput) || name.getDate().toString().toLowerCase().contains(userInput)){
+            if (name.getSalle().toString().toLowerCase().contains(item) || name.getDate().toString().toLowerCase().contains(item)){
                 newList.add(name);
                 Log.d(TAG, "onQueryTextChange: match ");
             }
         }
         Log.d(TAG, "onQueryTextChange: names  " + listItems);
-        Log.d(TAG, "onQueryTextChange: userInput  " + userInput);
+        Log.d(TAG, "onQueryTextChange: item  " + item);
         Log.d(TAG, "onQueryTextChange: newList "+ newList);
         myAdapter.updateListe(newList);
         adapter.notifyDataSetChanged();
+    }
 
-        return true;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item2:
+                openDialogSalle();
+                Toast.makeText(MainActivity.this,
+                        "Cas1", Toast.LENGTH_LONG).show();
+                adapter.notifyDataSetChanged();
+                return true;
+            case R.id.item3:
+                DialogFragment DatePicking = new DatePickerFragment();
+                DatePicking.show(getSupportFragmentManager(), "Selection de la date");
+                Log.d(TAG, "onOptionsItemSelected: cas2");
+                Toast.makeText(MainActivity.this,
+                        "cas2", Toast.LENGTH_LONG).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void openDialogSalle() {
+        SalleDial salleDial=new SalleDial();
+        salleDial.show(getSupportFragmentManager(),"Selectionner une Salle");
+        adapter.notifyDataSetChanged();
+    }
+    public void openDialogDate() {
+        DateDial salleDial=new DateDial();
+        salleDial.show(getSupportFragmentManager(),"Selectionner une Date");
+
+    }
+
+    @Override
+    public void application() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker,int year, int month, int day) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, day);
+        String DateActuelle = DateFormat.getDateInstance().format(c.getTime());
+        Log.d(TAG, "onDateSet: "+ DateActuelle);
+        List<listItem> newList =new ArrayList<>();
+        for (listItem name: listItems)
+        {
+            Log.d(TAG, "setPositiveButton: name "+ name.getDate());
+            if (name.getDate().toString().toLowerCase().contains(DateActuelle.toString().toLowerCase())){
+                newList.add(name);
+                Log.d(TAG, "setPositiveButton: name "+ DateActuelle);
+                Log.d(TAG, "setPositiveButton: match ");
+            }
+            Log.d(TAG, "onClick: "+ name.getDate().toString().toLowerCase());
+        }
+        Log.d(TAG, "setPositiveButton: names  " + listItems);
+        Log.d(TAG, "setPositiveButton: newList "+ newList);
+        refresh.setVisibility(View.VISIBLE);
+        myAdapter.updateListe(newList);
+        creation.application();
     }
 }

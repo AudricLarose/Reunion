@@ -63,15 +63,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Log.d(TAG, "onClick: "+ position);
                 exe.supprimeReunion(item);
                 Log.d(TAG, "onClick: Liste apres suppression "+ listItemes);
-                notifyDataSetChanged();            }
+                notifyDataSetChanged();
+            }
         });
     }
      public void updateListe(List<listItem> newList) {
          listItemes = new ArrayList<>();
-         Log.d(TAG, "updateListe: newlist" + newList);
-         Log.d(TAG, "updateListe: before " + listItemes);
         listItemes.addAll(newList);
-         Log.d(TAG, "updateListe: after " + listItemes);
          notifyDataSetChanged();
 
     }

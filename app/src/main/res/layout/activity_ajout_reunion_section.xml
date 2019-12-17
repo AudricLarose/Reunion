@@ -16,9 +16,11 @@
         android:hint="Participant"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Bouton_Heure" />
+        app:layout_constraintTop_toBottomOf="@+id/Bouton_Heure"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/nom_reunion"
@@ -33,47 +35,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <EditText
-        android:id="@+id/salle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Salle"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/participant" />
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00256696"
         android:paddingLeft="10sp"
-        android:shadowColor="#3F51B5"
-        android:textAlignment="center"
-        android:text="Ajout d'une reunion"
-        android:textSize="36sp"
-        android:textStyle="bold"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:shadowColor="#3F51B5"
+        android:text="Ajout d'une reunion"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/valider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/participant"
+        app:layout_constraintVertical_bias="0.52" />
 
     <Button
         android:id="@+id/valider"
         android:layout_width="114dp"
         android:layout_height="61dp"
-        android:layout_marginTop="20dp"
-
         android:text="Valider"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/salle" />
+        app:layout_constraintTop_toTopOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"/>
 
     <Button
         android:id="@+id/Bouton_Heure"
@@ -107,7 +105,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nom_reunion" />
-     <TextView
+
+    <TextView
         android:id="@+id/selectionDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,6 +117,17 @@
         app:layout_constraintBottom_toTopOf="@+id/bouton_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nom_reunion" />
-    />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Bouton_Heure"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
 
 </android.support.constraint.ConstraintLayout>

@@ -9,12 +9,13 @@ import Model.listItem;
 public abstract class ListeReunion {
 
     public static List<listItem> liste_des_items = Arrays.asList(
-            new listItem("projet 1","5,Dec","15:30","George@hotmail.com","A"),
-            new listItem("projet 2","5,Dec","5:30","George@hotmail.com","A"),
-            new listItem("projet 3","5,Dec","14:30","George@hotmail.com","A"),
-            new listItem("projet 4","5,Dec","17:30","George@hotmail.com","A"),
-            new listItem("projet 5","5,Dec","19:30","George@hotmail.com","A")
+            new listItem("Projet 1"," Dec 5, 2019","15:30","George@hotmail.com","Salle 1"),
+            new listItem("Projet 2"," Dec 5, 2019","5:30","George@hotmail.com","Salle 2"),
+            new listItem("Projet 3"," Dec 8, 2019","14:30","George@hotmail.com","Salle 5"),
+            new listItem("Projet 4"," Dec 7, 2019","17:30","George@hotmail.com","Salle 5"),
+            new listItem("Projet 5"," Dec 9, 2019","19:30","George@hotmail.com","Salle 8")
     );
+
     static List<listItem> liste_items() {
         return new ArrayList<>(liste_des_items);
     }

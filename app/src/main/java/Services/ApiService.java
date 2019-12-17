@@ -8,5 +8,6 @@ public interface ApiService {
     List<listItem> getReunion();
     void ajoutReunion(String nom_reunion,String date,String heure,String participant,String salle);
     void supprimeReunion(listItem reunion);
+    void recherche(String item);
     void filtreReunion();
 }
