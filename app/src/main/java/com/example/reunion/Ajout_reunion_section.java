@@ -97,22 +97,22 @@ public class Ajout_reunion_section extends AppCompatActivity  implements TimePic
             }
         });
     }
-        @Override
-        public void onTimeSet (TimePicker timePicker,int i, int i1){
-            TextView textView = (TextView) findViewById(R.id.selection);
-            textView.setText(i + ":" + i1);
-        }
+    @Override
+    public void onTimeSet (TimePicker timePicker,int i, int i1){
+        TextView textView = (TextView) findViewById(R.id.selection);
+        textView.setText(i + ":" + i1);
+    }
 
 
-        @Override
-        public void onDateSet (DatePicker datePicker,int year, int month, int day){
-            Calendar c = Calendar.getInstance();
-            c.set(Calendar.YEAR, year);
-            c.set(Calendar.MONTH, month);
-            c.set(Calendar.DAY_OF_MONTH, day);
-            String DateActuelle = DateFormat.getDateInstance().format(c.getTime());
-            selection_Date.setText(DateActuelle);
-        }
+    @Override
+    public void onDateSet (DatePicker datePicker,int year, int month, int day){
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, day);
+        String DateActuelle = DateFormat.getDateInstance().format(c.getTime());
+        selection_Date.setText(DateActuelle);
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
@@ -125,5 +125,4 @@ public class Ajout_reunion_section extends AppCompatActivity  implements TimePic
 
     }
 }
-
 

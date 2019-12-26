@@ -13,11 +13,16 @@ import static android.support.constraint.Constraints.TAG;
     private listItem reunion;
     private List<listItem> liste_itemes= ListeReunion.liste_items();
     private List<listItem> listItemList= ListeReunion.list_vide_modifiable();
+    private List<listItem> liste_original = ListeReunion.liste_original_modifiable();
 
     @Override
     public List<listItem> getReunion() {
         return liste_itemes;
     }
+    @Override
+        public List<listItem> getOriginal() {
+            return liste_original;
+        }
 
     @Override
     public List<listItem> getVide() {
@@ -49,6 +54,7 @@ import static android.support.constraint.Constraints.TAG;
         @Override
     public void supprimeReunion(listItem reunion) {
         liste_itemes.remove(reunion);
+        listItemList.remove(reunion);
     }
 
         @Override

@@ -10,91 +10,9 @@
     android:background="@color/colorAccent"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_weight="1"
-        android:text="Title"
-        app:layout_constraintBottom_toTopOf="@+id/partic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="101dp"
-        android:layout_height="19dp"
-        android:layout_weight="1"
-
-
-        android:text="Description"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
-        app:layout_constraintStart_toEndOf="@+id/great"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/great"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_weight="1"
-        android:text="Great!"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/title"
-        app:layout_constraintStart_toEndOf="@+id/title"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/partic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:text="partic"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/salle" />
-
-    <TextView
-        android:id="@+id/salle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginLeft="59dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_weight="1"
-        android:text="salle"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/description"
-        app:layout_constraintHorizontal_bias="0.396"
-        app:layout_constraintStart_toEndOf="@+id/great"
-        app:layout_constraintStart_toStartOf="@+id/great"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
-        android:id="@+id/item_list_delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="54dp"
@@ -106,5 +24,64 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/presence_online" />
 
+    <TextView
+        android:id="@+id/title"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_weight="1"
+        android:layout_marginLeft="15dp"
+        android:text="Titre"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="101dp"
+        android:layout_height="19dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="70dp"
+        android:layout_below="@+id/title"
+        android:text="Description"
+         />
+
+    <TextView
+        android:id="@+id/great"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_marginLeft="40dp"
+        android:text="Great!"
+android:layout_toRightOf="@+id/description"
+        android:layout_below="@+id/title"/>
+
+    <TextView
+        android:id="@+id/partic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:layout_weight="1"
+        android:text="partic"
+android:layout_below="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/salle" />
+
+    <TextView
+        android:id="@+id/salle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/great"
+        android:layout_below="@+id/title"
+        android:text="salle" />
+
+    <ImageButton
+        android:id="@+id/item_list_delete_button"
+        android:layout_width="58dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/salle"
+        android:background="#00FFFFFF"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+
+</RelativeLayout>
 </android.support.constraint.ConstraintLayout>
