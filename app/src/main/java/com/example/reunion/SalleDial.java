@@ -107,16 +107,10 @@ public class SalleDial extends AppCompatDialogFragment {
     private void verifie(String choix) {
         List<listItem> newList = new ArrayList<>();
         for (listItem name : listItems) {
-            Log.d(TAG, "setPositiveButton: name " + listItems);
             if (name.getSalle().toString().toLowerCase().contains(choix.toString().toLowerCase())) {
                 newList.add(name);
-                Log.d(TAG, "onQueryTextChange: match ");
             }
-            Log.d(TAG, "onClick: " + name.getSalle().toString().toLowerCase());
         }
-        Log.d(TAG, "setPositiveButton: names  " + listItems);
-        Log.d(TAG, "setPositiveButton: item  " + choix2.getText().toString());
-        Log.d(TAG, "setPositiveButton: newList " + newList);
         myAdapter.updateListe(newList);
         creation.application();
     }

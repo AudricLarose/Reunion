@@ -33,8 +33,6 @@ import static android.support.constraint.Constraints.TAG;
     public void ajoutReunion(String nom_reunion, String date, String heure, String participant, String salle) {
         liste_itemes.add(new listItem(nom_reunion,date,heure,participant,salle));
         listItemList.add(new listItem(nom_reunion,date,heure,participant,salle));
-
-        Log.d(TAG, "ajoutReunion: liste"+ liste_itemes);
     }
 
         @Override
@@ -61,10 +59,9 @@ import static android.support.constraint.Constraints.TAG;
         public void recherche(String item) {
             List<listItem> newList = new ArrayList<>();
             for (listItem name : liste_itemes) {
-                Log.d(TAG, "onQueryTextChange: name " + liste_itemes);
                 if (name.getSalle().toString().toLowerCase().contains(item) || name.getDate().toString().toLowerCase().contains(item)) {
                     newList.add(name);
-                    Log.d(TAG, "recherche: ");                }
+                }
             }
         }
 
