@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private final List<listItem> ListReset=new ArrayList<>();
     private List<listItem> ListOrignal=new ArrayList<>();
     private SwipeRefreshLayout refreshLayout;
+    private List<listItem> toutLaliste= new ArrayList<>();
     private static final String TAG = "MainActivity";
 
     @Override
@@ -69,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_main);
         service = DI.getService();
         refreshLayout=(SwipeRefreshLayout) findViewById(R.id.Refreshing);
-
         creation=new SalleDial.changement() {
     @Override
     public void application() {
@@ -90,11 +92,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         listItems= ListReset;
         myAdapter.updateListe2(listItems);
         creation.application();
+
+
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ConfirmationReset=true;
-                Log.d(TAG, "onRefresh: liste item "+ listItems);
                 myAdapter.updateListe(listItems);
                 creation.application();
                 refresh.setVisibility(View.GONE);
@@ -106,8 +109,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 listItems= ListOrignal;
                 myAdapter.updateListe2(listItems);
                 creation.application();
-                Log.d(TAG, "onRefresh: listereset "+ ListReset);
-                Log.d(TAG, "onRefresh: liste item "+ listItems);
                 adapter.notifyDataSetChanged();
                 refreshLayout.setRefreshing(false);
             }
@@ -120,12 +121,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
     }
-    @Override
+
+  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        MenuItem menuitem= menu.findItem(R.id.action_search);
-        SearchView searchView= (SearchView) menuitem.getActionView();
-        searchView.setOnQueryTextListener(this);
         return true;
     }
     @Override
@@ -144,15 +143,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         List<listItem> newList =new ArrayList<>();
         for (listItem name: listItems)
         {
-            Log.d(TAG, "onQueryTextChange: name "+ listItems);
             if (name.getSalle().toString().toLowerCase().contains(item) || name.getDate().toString().toLowerCase().contains(item)){
                 newList.add(name);
-                Log.d(TAG, "onQueryTextChange: match ");
             }
         }
-        Log.d(TAG, "onQueryTextChange: names  " + listItems);
-        Log.d(TAG, "onQueryTextChange: item  " + item);
-        Log.d(TAG, "onQueryTextChange: newList "+ newList);
         myAdapter.updateListe(newList);
         adapter.notifyDataSetChanged();
     }
@@ -162,16 +156,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         switch (item.getItemId()){
             case R.id.item2:
                 openDialogSalle();
-                Toast.makeText(MainActivity.this,
-                        "Cas1", Toast.LENGTH_LONG).show();
                 adapter.notifyDataSetChanged();
                 return true;
             case R.id.item3:
                 DialogFragment DatePicking = new DatePickerFragment();
                 DatePicking.show(getSupportFragmentManager(), "Selection de la date");
-                Log.d(TAG, "onOptionsItemSelected: cas2");
-                Toast.makeText(MainActivity.this,
-                        "cas2", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -198,9 +187,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if (confirmation==true){
             listItems=ListOrignal;
             myAdapter.updateListe2(listItems);
-            Log.d(TAG, "onRestoreInstanceState: listtreset "+ ListReset);
-            Log.d(TAG, "onRestoreInstanceState: ok "+ listItems);
-
         }
     }
 
@@ -210,27 +196,23 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
     @Override
     public void onDateSet(DatePicker datePicker,int year, int month, int day) {
+        toutLaliste=service.getALL();
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
         String DateActuelle = DateFormat.getDateInstance().format(c.getTime());
-        Log.d(TAG, "onDateSet: "+ DateActuelle);
+
         List<listItem> newList =new ArrayList<>();
-        for (listItem name: listItems)
+
+        for (listItem name: toutLaliste)
         {
-            Log.d(TAG, "setPositiveButton: name "+ name.getDate());
             if (name.getDate().toString().toLowerCase().contains(DateActuelle.toString().toLowerCase())){
                 newList.add(name);
-                Log.d(TAG, "setPositiveButton: name "+ DateActuelle);
-                Log.d(TAG, "setPositiveButton: match ");
             }
-            Log.d(TAG, "onClick: "+ name.getDate().toString().toLowerCase());
         }
-        Log.d(TAG, "setPositiveButton: names  " + listItems);
-        Log.d(TAG, "setPositiveButton: newList "+ newList);
         refresh.setVisibility(View.VISIBLE);
-        myAdapter.updateListe(newList);
+        myAdapter.updateListe2(newList);
         creation.application();
     }
 }

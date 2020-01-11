@@ -57,7 +57,6 @@ public class Ajout_reunion_section extends AppCompatActivity  implements TimePic
         retour = (ImageView) findViewById(R.id.imageView2);
         heure=(TextView) findViewById(R.id.selection);
         date=(TextView) findViewById(R.id.selectionDate);
-        salle = (EditText) findViewById(R.id.salle);
         valider = (Button) findViewById(R.id.valider);
         Bouton = (Button) findViewById(R.id.Bouton_Heure);
         Bouton_date = (Button) findViewById(R.id.bouton_date);
@@ -71,17 +70,15 @@ public class Ajout_reunion_section extends AppCompatActivity  implements TimePic
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((nom_reunion != null) && (participant != null) && (heure != null) && (text != null)&& (date != null)) {
-                    Log.d(TAG, "onClick: " + nom_reunion.getText().toString());
-                    Log.d(TAG, "onClick: " + participant.getText().toString());
-                    Log.d(TAG, "onClick: " + text);
+                if ((nom_reunion.getText().toString() != "") && (participant.getText().toString() != "") && (heure.getText().toString() != "") && (text.toString() != "")&& (date.getText().toString() != "")) {
                     service.ajoutReunion(nom_reunion.getText().toString(),date.getText().toString(),heure.getText().toString(),participant.getText().toString(),text);
                     finish();
                 }
+                else {
+                    Toast.makeText(Ajout_reunion_section.this,"Veuillez remplir tous les champs ! ",Toast.LENGTH_SHORT).show();                }
             }
 
         });
-
         Bouton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,8 +92,8 @@ public class Ajout_reunion_section extends AppCompatActivity  implements TimePic
                 DialogFragment DatePicking = new DatePickerFragment();
                 DatePicking.show(getSupportFragmentManager(), "Selection de la date");
             }
-        });
-    }
+        });}
+
     @Override
     public void onTimeSet (TimePicker timePicker,int i, int i1){
         TextView textView = (TextView) findViewById(R.id.selection);
@@ -117,7 +114,6 @@ public class Ajout_reunion_section extends AppCompatActivity  implements TimePic
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
         text = parent.getItemAtPosition(i).toString();
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override

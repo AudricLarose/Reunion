@@ -35,14 +35,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view= LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.list_row, viewGroup,false);
+                .inflate(R.layout.list_row, viewGroup,false);  // ligne de ma liste
         return new ViewHolder(view);
     }
 
     public MyAdapter (Context context , List<listItem> listItemes ){
         this.context=context;
         this.listItemes=listItemes;
-        Log.d(TAG, "updateListe: CONSTRUC " + listItemes);
         listItemesFull= new ArrayList<>(listItemes);
     }
 
@@ -50,40 +49,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder viewHolder, final int position) {
         exe= DI.getService();
         listItemes=exe.getReunion();
-        Log.d(TAG, "onBindViewHolder: liste total " + listItemes);
         final listItem item= listItemes.get(position);
-        viewHolder.name.setText(item.getNom_reunion());
+        viewHolder.name.setText(item.getNom_reunion()); // inscription de mon element
         viewHolder.description.setText(item.getDate());
         viewHolder.heure.setText(item.getHeure());
         viewHolder.participant.setText(item.getParticipant());
         viewHolder.salle.setText(item.getSalle());
-        Log.d(TAG, "onBindViewHolder: item " + item);
         viewHolder.poubelle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: liste avant suppression " + listItemes);
-                Log.d(TAG, "onClick: item supprimé " + item);
-                Log.d(TAG, "onClick: position numero "+ position);
                 exe.supprimeReunion(item);
-                    Log.d(TAG, "onClick: Liste apres suppression "+ listItemes);
                 notifyDataSetChanged();            }
         });
     }
      public void updateListe(List<listItem> newList) {
          exe= DI.getService();
          listItemes = new ArrayList<>();
-         Log.d(TAG, "updateListe: newlist" + newList);
          exe.ajouterTout(newList);
-         Log.d(TAG, "updateListe: listitem" + listItemes);
          notifyDataSetChanged();
-
     }
     public void updateListe2(List<listItem> newList) {
         exe= DI.getService();
         listItemes = new ArrayList<>();
-        Log.d(TAG, "updateListe: newlist" + newList);
         exe.Reset(newList);
-        Log.d(TAG, "updateListe: listitem" + listItemes);
         notifyDataSetChanged();
 
     }
@@ -93,7 +81,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{ // representation visuelle d'une ligne d'un recycleView
         public TextView name;
         public TextView description;
         public TextView heure;

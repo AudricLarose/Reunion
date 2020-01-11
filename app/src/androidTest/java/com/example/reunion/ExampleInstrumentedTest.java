@@ -30,11 +30,6 @@ public class ExampleInstrumentedTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
-    @Before
-    public void setUp() throws Exception
-    {
-
-    }
 
     @Test
     public void ListeFonctionnelle()

@@ -6,84 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="match_parent"
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salle 1"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 2"
-        android:layout_below="@+id/checkBox1"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 3"
-        android:layout_below="@+id/checkBox2"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
-    <CheckBox
-        android:id="@+id/checkBox4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 4"
-        android:layout_below="@+id/checkBox3"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
-    <CheckBox
-        android:id="@+id/checkBox5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 5"
-        android:layout_below="@+id/checkBox4"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
-    <CheckBox
-        android:id="@+id/checkBox6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 6"
-        android:layout_below="@+id/checkBox5"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
+        android:layout_centerInParent="true"
 
-    <CheckBox
-        android:id="@+id/checkBox7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 7"
-        android:layout_below="@+id/checkBox6"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
-    <CheckBox
-        android:id="@+id/checkBox8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 8"
-        android:layout_below="@+id/checkBox7"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
-    <CheckBox
-        android:id="@+id/checkBox9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 9"
-        android:layout_below="@+id/checkBox8"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
-    <CheckBox
-        android:id="@+id/checkBox10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salle 10"
-        android:layout_below="@+id/checkBox9"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"/>
+        />
 </RelativeLayout>

@@ -7,10 +7,9 @@ import java.util.List;
 
 import Model.listItem;
 
-import static android.support.constraint.Constraints.TAG;
-
     public class ExtendApiService implements ApiService {
     private listItem reunion;
+    private ArrayList<listItem> ALL=new ArrayList<>();
     private List<listItem> liste_itemes= ListeReunion.liste_items();
     private List<listItem> listItemList= ListeReunion.list_vide_modifiable();
     private List<listItem> liste_original = ListeReunion.liste_original_modifiable();
@@ -19,7 +18,15 @@ import static android.support.constraint.Constraints.TAG;
     public List<listItem> getReunion() {
         return liste_itemes;
     }
-    @Override
+
+        @Override
+        public List<listItem> getALL() {
+        ALL.clear();
+        ALL.addAll(liste_itemes);
+        return ALL;
+    }
+
+        @Override
         public List<listItem> getOriginal() {
             return liste_original;
         }

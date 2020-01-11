@@ -29,11 +29,14 @@ import static org.junit.Assert.assertTrue;
 @RunWith(JUnit4.class)
 public class ExampleUnitTest {
     private ApiService service;
+    List<listItem> liste_original=new ArrayList<>();
     List<listItem> liste=new ArrayList<>();
 
     @Before
     public void setup() {
         service = DI.getService();
+        liste_original=service.getOriginal();
+        liste=liste_original;
     }
 
     @Test
@@ -56,8 +59,8 @@ public class ExampleUnitTest {
         assertThat(liste_items, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedlistItems.toArray()));
     }
     @Test
-    public void ajouterTout() {
-        listItem supprime = service.getReunion().get(0);
+    public void supprimeTout() {
+        listItem supprime = liste.get(0);
         service.supprimeReunion(supprime);
         assertFalse(service.getReunion().contains(supprime));
     }
