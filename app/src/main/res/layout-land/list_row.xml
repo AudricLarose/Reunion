@@ -47,7 +47,7 @@
             android:layout_below="@+id/title"
             android:layout_marginLeft="70dp"
             android:layout_weight="1"
-            android:text="Description" />
+            android:text="Date" />
 
         <TextView
             android:id="@+id/great"
@@ -56,7 +56,7 @@
             android:layout_below="@+id/title"
             android:layout_marginLeft="40dp"
             android:layout_toRightOf="@+id/description"
-            android:text="Great!" />
+            android:text="heure" />
 
         <TextView
             android:id="@+id/partic"

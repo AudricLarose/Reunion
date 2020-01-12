@@ -37,11 +37,10 @@
         android:id="@+id/description"
         android:layout_width="101dp"
         android:layout_height="19dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="70dp"
         android:layout_below="@+id/title"
-        android:text="Description"
-         />
+        android:layout_marginLeft="70dp"
+        android:layout_weight="1"
+        android:text="date" />
 
     <TextView
         android:id="@+id/great"
@@ -54,16 +53,16 @@
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         android:layout_toRightOf="@+id/description"
-        android:text="Great!" />
+        android:text="Heure" />
 
     <TextView
         android:id="@+id/partic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
         android:layout_marginLeft="70dp"
         android:layout_weight="1"
-        android:text="partic"
-android:layout_below="@+id/description"
+        android:text="participant"
         app:layout_constraintTop_toBottomOf="@+id/salle" />
 
     <TextView
