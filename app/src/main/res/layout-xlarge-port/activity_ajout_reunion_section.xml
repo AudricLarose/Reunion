@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Ajout_reunion_section">
+
+
+    <TextView
+        android:id="@+id/textreu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginStart="175dp"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="168dp"
+        android:text="Nom Reunion :"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/nom_reunion"
+        android:layout_width="209dp"
+        android:layout_height="28dp"
+        android:layout_below="@+id/textreu"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="164dp"
+        android:layout_marginLeft="164dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/selectionDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nom_reunion"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="256dp"
+        android:layout_marginLeft="256dp"
+
+        android:layout_marginTop="65dp"
+        android:text="date :"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/bouton_date"
+        android:layout_width="264dp"
+        android:layout_height="78dp"
+        android:layout_below="@+id/selectionDate"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="133dp"
+        android:layout_marginLeft="133dp"
+        android:layout_marginTop="12dp"
+        android:textSize="30dp"
+
+        android:text="Date" />
+
+    <TextView
+        android:id="@+id/selection"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bouton_date"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="256dp"
+
+        android:layout_marginLeft="256dp"
+        android:layout_marginTop="60dp"
+        android:text="salle :"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/Bouton_Heure"
+        android:layout_width="246dp"
+        android:layout_height="84dp"
+        android:layout_below="@id/selection"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="339dp"
+        android:text="Heure"
+
+        android:textSize="30dp" />
+
+    <View
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginLeft="41dp"
+        android:background="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textpart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="905dp"
+        android:layout_marginLeft="905dp"
+        android:layout_marginTop="102dp"
+        android:layout_toRightOf="@id/textreu"
+        android:text="Participants :"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/participant"
+        android:layout_width="204dp"
+        android:layout_height="31dp"
+        android:layout_below="@id/textpart"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="903dp"
+        android:layout_marginLeft="903dp"
+        android:layout_marginTop="181dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/participant"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="391dp"
+        android:layout_marginEnd="253dp"
+        android:layout_marginRight="253dp" />
+
+    <Button
+        android:id="@+id/valider"
+        android:layout_width="277dp"
+        android:layout_height="85dp"
+        android:layout_below="@id/spinner"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="30dp"
+
+        android:layout_marginStart="864dp"
+        android:layout_marginLeft="864dp"
+        android:layout_marginTop="113dp"
+        android:text="Valider" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+</RelativeLayout>
