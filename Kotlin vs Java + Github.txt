@@ -1,4 +1,4 @@
-Kotilin est le nouveau langage de prodgrammation de Google et se demarque par sa simplicité du code.
+Kotlin est le nouveau langage de programmation de Google et se demarque par sa simplicité du code.
 Il est supporté par Android studio et peu potentiellement remplacé Java cependant je pense que Kotlin ne devrait pas 
 etre notre choix pour se projet pour les points suivants :
 
