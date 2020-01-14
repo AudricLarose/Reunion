@@ -91,7 +91,7 @@ public class Ajout_reunion_section extends AppCompatActivity  implements TimePic
                     service.ajoutReunion(nom_reunion.getText().toString(),date.getText().toString(),heure.getText().toString(),participant.getText().toString(),spinTextSalle);
                     finish();
                 }
-                else if ((checkmail==true) ||(creneauChecker==true)){ Toast.makeText(Ajout_reunion_section.this,"Veuillez remplir tous les champs ! ",Toast.LENGTH_SHORT).show();}
+                else if ((checkmail==true) ||(creneauChecker==true)){ Toast.makeText(Ajout_reunion_section.this,"Attentions aux champs erronés ou  vides ",Toast.LENGTH_SHORT).show();}
             }
         });
         Bouton.setOnClickListener(new View.OnClickListener() {
