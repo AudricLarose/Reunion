@@ -30,13 +30,6 @@ public class ExampleInstrumentedTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
-
-    @Test
-    public void ListeFonctionnelle()
-    {
-        Espresso.onView(withId(R.id.recycleViewId)).check(matches(hasMinimumChildCount(1)));
-        ;
-    }
     @Test
     public  void isName(){
         onView(withId(R.id.ajout))

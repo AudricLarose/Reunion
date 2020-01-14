@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DI.DI;
-import Model.listItem;
+import Model.Reunion;
 import Services.ApiService;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private Context context;
-    private listItem reunion;
-    private  List<listItem>   listItemes;
-    private List<listItem> listItemesFull;
+    private Reunion reunion;
+    private  List<Reunion>   listItemes;
+    private List<Reunion> listItemesFull;
     private static final String TAG = "MyAdapter";
     private ApiService exe;
     private boolean Confirmation;
@@ -39,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
-    public MyAdapter (Context context , List<listItem> listItemes ){
+    public MyAdapter (Context context , List<Reunion> listItemes ){
         this.context=context;
         this.listItemes=listItemes;
         listItemesFull= new ArrayList<>(listItemes);
@@ -49,7 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull MyAdapter.ViewHolder viewHolder, final int position) {
         exe= DI.getService();
         listItemes=exe.getReunion();
-        final listItem item= listItemes.get(position);
+        final Reunion item= listItemes.get(position);
         viewHolder.name.setText(item.getNom_reunion()); // inscription de mon element
         viewHolder.description.setText(item.getDate());
         viewHolder.heure.setText(item.getHeure());
@@ -62,13 +62,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 notifyDataSetChanged();            }
         });
     }
-     public void updateListe(List<listItem> newList) {
+     public void updateListe(List<Reunion> newList) {
          exe= DI.getService();
          listItemes = new ArrayList<>();
          exe.ajouterTout(newList);
          notifyDataSetChanged();
     }
-    public void updateListe2(List<listItem> newList) {
+    public void updateListe2(List<Reunion> newList) {
         exe= DI.getService();
         listItemes = new ArrayList<>();
         exe.Reset(newList);

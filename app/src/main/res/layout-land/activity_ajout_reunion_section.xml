@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/ajout_reunion"
     android:layout_height="match_parent"
     tools:context=".Ajout_reunion_section">
 
@@ -21,16 +22,17 @@
         android:textAlignment="center"
         android:textStyle="bold" />
 
+
     <EditText
         android:id="@+id/nom_reunion"
         android:layout_width="209dp"
-        android:layout_height="28dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textreu"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginLeft="66dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textAlignment="center"
@@ -39,7 +41,6 @@
         app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="76dp" />
-
 
     <TextView
         android:id="@+id/selectionDate"
@@ -133,14 +134,14 @@
     <EditText
         android:id="@+id/participant"
         android:layout_width="204dp"
-        android:layout_height="31dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/textpart"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="403dp"
-        android:layout_marginLeft="403dp"
-        android:layout_marginTop="69dp"
+        android:layout_marginStart="409dp"
+        android:layout_marginLeft="409dp"
+        android:layout_marginTop="51dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textAlignment="center"

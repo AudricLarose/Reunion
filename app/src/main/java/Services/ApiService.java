@@ -2,17 +2,17 @@ package Services;
 
 import java.util.List;
 
-import Model.listItem;
+import Model.Reunion;
+
 
 public interface ApiService {
-    List<listItem> getReunion();
-    List<listItem> getALL();
-    List<listItem> getVide();
+    List<Reunion> getReunion();
+    List<Reunion> getALL();
     void ajoutReunion(String nom_reunion,String date,String heure,String participant,String salle);
-    void ajouterTout (List<listItem> newList);
-    void supprimeReunion(listItem reunion);
-    List<listItem> getOriginal ();
-    void Reset(List<listItem> newList);
-    void recherche(String item);
-    void filtreReunion();
+    void ajouterTout (List<Reunion> newList);
+    void supprimeReunion(Reunion reunion);
+    List<Reunion> getOriginal ();
+    List<Reunion> getExemple ();
+    void Reset(List<Reunion> newList);
+    List<Reunion> filtreReunion(String item);
 }

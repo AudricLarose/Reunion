@@ -1,13 +1,13 @@
 package Model;
 
-public class listItem {
+public class Reunion {
     private String nom_reunion;
     private String date;
     private String heure;
     private String participant;
     private String salle;
 
-    public listItem(String nom_reunion, String date, String heure, String participant, String salle) {
+    public Reunion(String nom_reunion, String date, String heure, String participant, String salle) {
         this.nom_reunion = nom_reunion;
         this.date = date;
         this.heure = heure;

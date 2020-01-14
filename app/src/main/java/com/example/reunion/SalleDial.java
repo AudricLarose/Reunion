@@ -22,7 +22,7 @@ import java.util.List;
 
 import Adapter.MyAdapter;
 import DI.DI;
-import Model.listItem;
+import Model.Reunion;
 import Services.ApiService;
 
 public class SalleDial extends AppCompatDialogFragment {
@@ -37,7 +37,7 @@ public class SalleDial extends AppCompatDialogFragment {
     private CheckBox choix9;
     private CheckBox choix10;
     private String choix;
-    private List<listItem> listItems;
+    private List<Reunion> listItems;
     private MyAdapter myAdapter;
     private ApiService service;
     private changement creation;
@@ -84,16 +84,6 @@ public class SalleDial extends AppCompatDialogFragment {
             }
         });
         myAdapter.notifyDataSetChanged();
-        //     choix1= view.findViewById(R.id.checkBox1);
-        //     choix2= view.findViewById(R.id.checkBox2);
-        //     choix3= view.findViewById(R.id.checkBox3);
-        //     choix4= view.findViewById(R.id.checkBox4);
-        //     choix5= view.findViewById(R.id.checkBox5);
-        //     choix6= view.findViewById(R.id.checkBox6);
-        //     choix7= view.findViewById(R.id.checkBox7);
-        //    choix8= view.findViewById(R.id.checkBox8);
-        //   choix9= view.findViewById(R.id.checkBox9);
-        //  choix10= view.findViewById(R.id.checkBox10);
         return builder.create();
     }
 
@@ -132,12 +122,7 @@ public class SalleDial extends AppCompatDialogFragment {
     }
 
     private void verifie(String text) {
-        List<listItem> newList = new ArrayList<>();
-        for (listItem name : listItems) {
-            if (name.getSalle().toString().toLowerCase().contains(text)) {
-                newList.add(name);
-            }
-        }
+        List<Reunion> newList=service.filtreReunion(text);
         myAdapter.updateListe2(newList);
         creation.application();
     }
